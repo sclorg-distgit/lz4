@@ -8,7 +8,7 @@
 
 Name:           %{?scl_prefix}lz4
 Version:        r131
-Release:        4%{?dist}
+Release:        5%{?dist}
 Summary:        Extremely fast compression algorithm
 
 Group:          Applications/System
@@ -58,6 +58,8 @@ contains static libraries for static linking of applications.
 echo '#!/bin/sh' > ./configure
 chmod +x ./configure
 
+sed -i -e 's/^LIBVER_MAJOR=/LIBVER_MAJOR=%{?scl_prefix}/' lib/Makefile
+
 %build
 %{?scl:scl enable %{scl} - << \EOF}
 %configure
@@ -87,7 +89,7 @@ rm -f %{buildroot}%{_libdir}/liblz4.a
 %{_bindir}/unlz4
 %{_mandir}/man1/lz4*
 %{_mandir}/man1/unlz4*
-%{_libdir}/liblz4.so.1*
+%{_libdir}/liblz4.so.*
 
 
 %files devel
@@ -105,6 +107,9 @@ rm -f %{buildroot}%{_libdir}/liblz4.a
 
 
 %changelog
+* Sun Jul 17 2016 Honza Horak <hhorak@redhat.com> - r131-5
+- Prefix major version of the library with the scl name
+
 * Fri Jul 15 2016 Honza Horak <hhorak@redhat.com> - r131-4
 - Require runtime package from the scl
 
