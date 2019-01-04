@@ -8,7 +8,7 @@
 
 Name:           %{?scl_prefix}lz4
 Version:        r131
-Release:        7%{?dist}
+Release:        7.bs1%{?dist}
 Summary:        Extremely fast compression algorithm
 
 Group:          Applications/System
